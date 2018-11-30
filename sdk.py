@@ -42,6 +42,7 @@ class UConnection(object):
 
     def get(self, resouse, params):
         resouse += "?" + urllib.urlencode(params)
+        print resouse
         print("%s%s" % (self.base_url, resouse))
         self.conn.request("GET", resouse)
         response = json.loads(self.conn.getresponse().read())
@@ -71,6 +72,7 @@ class UcloudApiClient(object):
             _params["ProjectId"] = project_id
 
         _params["Signature"] = _verfy_ac(self.private_key, _params)
+        #print _params
         return self.conn.get(uri, _params)
 
     def post(self, uri, params):
